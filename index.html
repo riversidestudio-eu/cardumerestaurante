@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Cardume</title>
+<meta name="description" content="Cardume - Restaurante português em Vila Nova de Gaia. Reservas: +351 932 280 272"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet"/>
+<script>document.documentElement.classList.add('has-js');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#FAF6EF;
+  --warm:#F2EBE0;
+  --sand:#E0D3C4;
+  --red:#7A1E1E;
+  --red-dk:#5C1414;
+  --red-lt:#A83030;
+  --gold:#C8A96E;
+  --gold-lt:#E8D4A8;
+  --brown:#2A1508;
+  --brown-md:#5C3018;
+  --gray:#8A7060;
+  --dark:#1A0C04;
+  --white:#FFFFFF;
+  --surface:#FFFFFF;
+  --font-d:'Pirata One','Bebas Neue',Georgia,serif;
+  --font-b:'Oswald',Arial,sans-serif;
+  --sh:0 4px 24px rgba(26,12,4,.10);
+  --sh-md:0 8px 40px rgba(26,12,4,.15);
+  --sh-lg:0 16px 64px rgba(26,12,4,.20);
+  --dur:.3s;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--cream);color:var(--brown);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+h1,h2,h3,h4{font-family:var(--font-d);line-height:1.12}
+
+/* ── Layout ── */
+.container{max-width:1160px;margin:0 auto;padding:0 28px}
+section{padding:96px 0}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:4px;font-family:var(--font-b);font-size:.875rem;font-weight:500;letter-spacing:.04em;cursor:pointer;border:none;transition:all var(--dur) var(--ease)}
+.btn-primary{background:var(--red);color:var(--white);box-shadow:0 4px 16px rgba(122,30,30,.30)}
+.btn-primary:hover{background:var(--red-dk);transform:translateY(-2px);box-shadow:0 8px 28px rgba(122,30,30,.38)}
+.btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.55)}
+.btn-outline:hover{background:rgba(255,255,255,.1);border-color:var(--white);transform:translateY(-2px)}
+.btn-outline-dark{background:transparent;color:var(--red);border:1.5px solid var(--red)}
+.btn-outline-dark:hover{background:var(--red);color:var(--white);transform:translateY(-2px)}
+
+/* ── Labels ── */
+.label{display:inline-flex;align-items:center;gap:10px;font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.label::before{content:'';width:24px;height:1px;background:var(--gold);flex-shrink:0}
+
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:18px 0;transition:all .4s var(--ease)}
+#nav.scrolled{background:rgba(26,12,4,.96);backdrop-filter:blur(20px);padding:12px 0;box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo{display:inline-flex;align-items:center;font-family:var(--font-d);font-size:1.25rem;font-weight:700;color:var(--white);letter-spacing:.02em;white-space:nowrap;line-height:1}
+.nav-logo span{color:var(--gold)}
+.nav-logo img{display:block;width:auto;max-width:240px;max-height:72px;object-fit:contain;filter:drop-shadow(0 4px 14px rgba(0,0,0,.45))}
+#nav.scrolled .nav-logo img{max-width:210px;max-height:58px}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:.82rem;font-weight:400;color:rgba(255,255,255,.7);letter-spacing:.04em;position:relative;padding-bottom:3px;transition:color var(--dur) var(--ease)}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width var(--dur) var(--ease)}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-social{display:flex;gap:12px}
+.nav-social a{font-size:.8rem;color:rgba(255,255,255,.55);transition:color var(--dur)}
+.nav-social a:hover{color:var(--gold)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;transition:all .3s}
+.mob{display:none;position:fixed;inset:0;z-index:199;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:24px}
+.mob.open{display:flex}
+.mob-close{position:absolute;top:20px;right:28px;background:none;border:none;font-size:1.5rem;color:rgba(255,255,255,.6);cursor:pointer}
+.mob a{font-family:var(--font-d);font-size:2rem;font-weight:400;color:rgba(255,255,255,.85);transition:color .2s}
+.mob a:hover{color:var(--gold)}
+
+/* ── HERO ── */
+.hero{min-height:100svh;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:linear-gradient(160deg,#1A0C04 0%,#3A1A0A 40%,#2A1008 100%)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(26,12,4,.92) 0%,rgba(26,12,4,.60) 55%,rgba(26,12,4,.30) 100%)}
+.hero-photo{position:absolute;inset:0;z-index:0}
+.hero-photo-placeholder{width:100%;height:100%;background:linear-gradient(135deg,#3A1A0A 0%,#5C2C10 35%,#8A4820 65%,#4A2010 100%);display:flex;align-items:center;justify-content:center}
+.hero-photo-placeholder svg{opacity:.08;width:200px;height:200px}
+.tem-foto{background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important}
+.tem-foto svg{display:none}
+.hero-content{position:relative;z-index:1;padding:120px 0 80px;max-width:680px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.25);color:var(--gold-lt);padding:8px 16px;border-radius:99px;font-size:.75rem;font-weight:500;margin-bottom:26px;letter-spacing:.06em}
+.hero-eyebrow:empty{display:none}
+.hero h1{font-size:clamp(2.8rem,6vw,5.2rem);font-weight:700;color:var(--white);line-height:1.06;margin-bottom:20px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-lead{font-size:1.05rem;color:rgba(255,255,255,.68);line-height:1.82;max-width:520px;margin-bottom:36px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px}
+.hero-info{display:flex;gap:32px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1);padding-top:32px}
+.hi{display:flex;align-items:center;gap:10px}
+.hi-icon{font-size:1rem;opacity:.7}
+.hi-text{font-size:.8rem;color:rgba(255,255,255,.55)}
+.hi-text strong{display:block;font-size:.85rem;font-weight:500;color:rgba(255,255,255,.85)}
+
+/* ── RIBBON ── */
+.ribbon{background:var(--red);color:rgba(255,255,255,.85);padding:13px 0;overflow:hidden}
+.ribbon-track{display:flex;gap:48px;width:max-content;animation:ticker 28s linear infinite}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ri{display:flex;align-items:center;gap:12px;white-space:nowrap;font-size:.72rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase}
+.rd{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.35);flex-shrink:0}
+
+/* ── SOBRE ── */
+.sobre{background:var(--surface)}
+.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.sobre-visual{position:relative}
+.sobre-frame{aspect-ratio:4/5;border-radius:8px;overflow:hidden;box-shadow:var(--sh-lg);position:relative}
+.sobre-placeholder{width:100%;height:100%;background:linear-gradient(145deg,#3A1A0A,#6A3018 50%,#8A4820);display:flex;align-items:center;justify-content:center}
+.sobre-badge{position:absolute;bottom:-16px;right:-16px;background:var(--surface);border-radius:8px;padding:18px 22px;box-shadow:var(--sh-lg);border:1px solid rgba(42,21,8,.06);text-align:center}
+.sb-n{font-family:var(--font-d);font-size:2.2rem;font-weight:700;color:var(--red);line-height:1}
+.sb-l{font-size:.7rem;color:var(--gray);margin-top:4px}
+.sobre-text h2{font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--brown);margin-bottom:18px}
+.sobre-text h2 em{font-style:italic;color:var(--red)}
+.sobre-body{font-size:.95rem;color:var(--brown-md);line-height:1.88}
+.sobre-body p+p{margin-top:14px}
+.sobre-feats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.sf{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--warm);border-radius:6px}
+.sf-dot{width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0}
+.sf p{font-size:.82rem;color:var(--brown-md)}
+
+/* ── PRATOS ── */
+.pratos{background:var(--warm)}
+.pratos-head{text-align:center;margin-bottom:60px}
+.pratos-head h2{font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--brown);margin-bottom:10px}
+.pratos-head p{font-size:1rem;color:var(--gray);max-width:480px;margin:0 auto}
+.pratos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.prato{background:var(--surface);border-radius:8px;overflow:hidden;box-shadow:var(--sh);transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease);cursor:default}
+.prato:hover{transform:translateY(-6px);box-shadow:var(--sh-lg)}
+.prato-img{aspect-ratio:4/3;overflow:hidden;position:relative}
+.prato-ph{width:100%;height:100%;display:flex;align-items:flex-end;justify-content:flex-start;padding:14px}
+.ph1{background:linear-gradient(145deg,#5C2C10,#8A4820 60%,#AA6030)}
+.ph2{background:linear-gradient(145deg,#2A1008,#4A2818 60%,#7A4828)}
+.ph3{background:linear-gradient(145deg,#6A3018,#9A5030 60%,#C07848)}
+.prato-tag{background:rgba(0,0,0,.45);color:rgba(255,255,255,.9);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:99px;backdrop-filter:blur(4px)}
+.prato-body{padding:22px}
+.prato-body h3{font-size:1.3rem;font-weight:700;color:var(--brown);margin-bottom:6px}
+.prato-body p{font-size:.86rem;color:var(--gray);line-height:1.75;margin-bottom:14px}
+.prato-price{font-family:var(--font-d);font-size:1.4rem;font-weight:700;color:var(--red)}
+
+/* ── MENU ── */
+.menu-section{background:var(--surface)}
+.menu-head{text-align:center;margin-bottom:56px}
+.menu-head h2{font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--brown);margin-bottom:8px}
+.menu-tabs{display:flex;justify-content:center;gap:0;margin-bottom:48px;border:1px solid var(--sand);border-radius:6px;overflow:hidden;width:fit-content;margin:0 auto 48px}
+.mtab{padding:12px 26px;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);background:none;border:none;cursor:pointer;transition:all var(--dur);border-right:1px solid var(--sand)}
+.mtab:last-child{border-right:none}
+.mtab.active,.mtab:hover{background:var(--red);color:var(--white)}
+.menu-cat{display:none}
+.menu-cat.active{display:block}
+.menu-items{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.mi{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:20px 0;border-bottom:1px solid var(--sand)}
+.mi:last-child{border-bottom:none}
+.mi-info h4{font-size:1.05rem;font-weight:500;color:var(--brown);margin-bottom:4px}
+.mi-info p{font-size:.82rem;color:var(--gray);line-height:1.65;max-width:320px}
+.mi-price{font-family:var(--font-d);font-size:1.2rem;font-weight:700;color:var(--red);white-space:nowrap;flex-shrink:0;margin-top:2px}
+.menu-col{padding:0 28px}
+.menu-col:first-child{border-right:1px solid var(--sand);padding-left:0}
+.menu-col:last-child{padding-right:0}
+
+/* ── HORÁRIOS ── */
+.horarios{background:var(--dark);position:relative;overflow:hidden}
+.horarios::before{content:'';position:absolute;top:-200px;right:-200px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(122,30,30,.12) 0%,transparent 65%);pointer-events:none}
+.hor-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.hor-col{padding:0 40px}
+.hor-col:first-child{padding-left:0}
+.hor-col:last-child{padding-right:0;border-left:1px solid rgba(255,255,255,.08)}
+.hor-col:nth-child(2){border-left:1px solid rgba(255,255,255,.08)}
+.hor-col h3{font-family:var(--font-d);font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:22px}
+.hor-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.hor-row:last-child{border-bottom:none}
+.hor-day{font-size:.82rem;color:rgba(255,255,255,.5)}
+.hor-time{font-size:.82rem;font-weight:500;color:rgba(255,255,255,.85)}
+.hor-time.closed{color:rgba(255,255,255,.3)}
+.mapa-placeholder{width:100%;aspect-ratio:16/7;background:linear-gradient(135deg,#1E1008 0%,#2A1A0E 50%,#1A0E06 100%);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border:1px solid rgba(255,255,255,.06);margin-top:8px}
+.mapa-placeholder p{font-size:.82rem;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase}
+.morada{margin-top:16px}
+.morada p{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.8}
+.morada strong{color:rgba(255,255,255,.85);font-weight:500}
+
+/* ── DEPOIMENTOS ── */
+.depoimentos{background:var(--warm)}
+.dep-head{text-align:center;margin-bottom:56px}
+.dep-head h2{font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--brown);margin-bottom:8px}
+.dep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.dep{background:var(--surface);border-radius:8px;padding:30px 26px;box-shadow:var(--sh);transition:transform var(--dur),box-shadow var(--dur);cursor:default}
+.dep:hover{transform:translateY(-5px);box-shadow:var(--sh-lg)}
+.dep-stars{color:#C88840;font-size:.85rem;letter-spacing:3px;margin-bottom:14px}
+.dep blockquote{font-family:var(--font-d);font-size:1.05rem;font-style:italic;color:var(--brown);line-height:1.65;margin-bottom:20px}
+.dep-foot{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--sand)}
+.dep-av{width:40px;height:40px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:1rem;font-weight:700}
+.av1{background:rgba(122,30,30,.1);color:var(--red)}
+.av2{background:rgba(200,169,110,.15);color:#8A6020}
+.av3{background:rgba(42,21,8,.08);color:var(--brown-md)}
+.dep-name{font-size:.86rem;font-weight:500;color:var(--brown)}
+.dep-loc{font-size:.72rem;color:var(--gray);margin-top:2px}
+
+/* ── RESERVAS ── */
+.reservas{background:var(--dark)}
+.res-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start}
+.res-info .label{color:var(--gold-lt)}
+.res-info .label::before{background:var(--gold-lt)}
+.res-info h2{font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--white);margin-bottom:16px}
+.res-info p{font-size:.96rem;color:rgba(255,255,255,.6);line-height:1.85;margin-bottom:28px}
+.res-contact{display:flex;flex-direction:column;gap:10px}
+.rc{display:flex;align-items:center;gap:14px;padding:13px 16px;background:rgba(255,255,255,.05);border-radius:6px;transition:background var(--dur)}
+.rc:hover{background:rgba(255,255,255,.08)}
+.rc-icon{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.rci1{background:rgba(37,211,102,.15)}
+.rci2{background:rgba(200,169,110,.15)}
+.rci3{background:rgba(255,255,255,.08)}
+.rc-main{font-size:.86rem;font-weight:500;color:rgba(255,255,255,.85)}
+.rc-sub{font-size:.74rem;color:rgba(255,255,255,.4);margin-top:1px}
+.form-wrap{background:var(--surface);border-radius:8px;padding:40px}
+.form-wrap h3{font-family:var(--font-d);font-size:1.7rem;font-weight:700;color:var(--brown);margin-bottom:24px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:.72rem;font-weight:600;color:var(--brown);margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase}
+.fg input,.fg select,.fg textarea{width:100%;padding:12px 14px;border:1.5px solid var(--sand);border-radius:6px;font-family:var(--font-b);font-size:.9rem;color:var(--brown);background:var(--cream);outline:none;transition:border-color var(--dur);resize:vertical}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--red)}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn-submit{width:100%;margin-top:16px;padding:15px;background:var(--red);color:var(--white);border:none;border-radius:6px;font-family:var(--font-b);font-size:.875rem;font-weight:500;letter-spacing:.04em;cursor:pointer;box-shadow:0 4px 16px rgba(122,30,30,.28);transition:all var(--dur)}
+.btn-submit:hover{background:var(--red-dk);transform:translateY(-2px);box-shadow:0 8px 24px rgba(122,30,30,.36)}
+.form-ok{display:none;text-align:center;padding:32px}
+.form-ok h4{font-family:var(--font-d);font-size:1.6rem;color:var(--brown);margin-bottom:8px}
+.form-ok p{font-size:.88rem;color:var(--gray)}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);padding:64px 0 24px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:24px}
+.foot-logo{display:inline-flex;align-items:center;font-family:var(--font-d);font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:12px;line-height:1}
+.foot-logo span{color:var(--gold)}
+.foot-logo img{display:block;width:auto;max-width:220px;max-height:92px;object-fit:contain;margin-bottom:12px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.45))}
+.foot-desc{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.82;max-width:260px;margin-bottom:20px}
+.foot-soc{display:flex;gap:9px}
+.fs{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.78rem;color:rgba(255,255,255,.55);cursor:pointer;transition:all var(--dur)}
+.fs:hover{background:var(--red);color:var(--white);transform:translateY(-2px)}
+.foot-col h5{font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.foot-col a{font-size:.82rem;color:rgba(255,255,255,.45);transition:color var(--dur)}
+.foot-col a:hover{color:var(--gold)}
+.foot-btm{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.foot-btm p{font-size:.72rem;color:rgba(255,255,255,.22)}
+
+/* ── WhatsApp ── */
+.wa{position:fixed;bottom:26px;right:26px;z-index:300;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);animation:wap 3s ease-in-out infinite;transition:transform var(--dur)}
+.wa:hover{transform:scale(1.1);animation:none}
+@keyframes wap{0%,100%{box-shadow:0 4px 16px rgba(37,211,102,.4)}50%{box-shadow:0 4px 24px rgba(37,211,102,.65),0 0 0 7px rgba(37,211,102,.08)}}
+.wa svg{width:26px;height:26px;fill:#fff}
+
+/* ── Reveal ── */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .68s var(--ease),transform .68s var(--ease)}
+.rv-l{opacity:0;transform:translateX(-26px);transition:opacity .68s var(--ease),transform .68s var(--ease)}
+.rv-r{opacity:0;transform:translateX(26px);transition:opacity .68s var(--ease),transform .68s var(--ease)}
+.rv.on,.rv-l.on,.rv-r.on{opacity:1;transform:translate(0)}
+html:not(.has-js) .rv,
+html:not(.has-js) .rv-l,
+html:not(.has-js) .rv-r{opacity:1;transform:none;transition:none}
+
+/* ── Responsive ── */
+@media(max-width:1180px){
+  .container{max-width:100%;padding:0 32px}
+  .nav-links{gap:20px}
+  .nav-right{gap:10px}
+  .nav-right .btn{padding:10px 16px!important}
+}
+@media(max-width:1024px){
+  section{padding:84px 0}
+  .pratos-grid{grid-template-columns:1fr 1fr}
+  .dep-grid{grid-template-columns:1fr 1fr}
+  .hor-grid{grid-template-columns:1fr;gap:44px}
+  .hor-col{padding:0;border:none!important}
+  .menu-items{grid-template-columns:1fr}
+  .menu-col{padding:0;border:none!important}
+  .sobre-grid,.res-grid{grid-template-columns:1fr;gap:52px}
+  .res-grid{align-items:stretch}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:860px){
+  .nav-links,.nav-social,.nav-right{display:none}
+  .hamburger{display:flex;min-width:42px;min-height:42px;align-items:center;justify-content:center;margin-right:-8px}
+}
+@media(max-width:768px){
+  html{-webkit-text-size-adjust:100%}
+  body{width:100%;overflow-x:hidden}
+  section{padding:68px 0}
+  .container{width:100%;padding:0 20px}
+  .btn{width:100%;min-height:48px;justify-content:center;text-align:center;padding:13px 18px}
+
+  #nav{padding:12px 0;background:rgba(26,12,4,.94);backdrop-filter:blur(16px)}
+  #nav.scrolled{padding:10px 0}
+  .nav-inner{gap:12px;min-width:0}
+  .nav-logo{font-size:1.05rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .nav-logo img{max-width:170px;max-height:58px}
+  .mob{z-index:500;padding:72px 24px 36px;overflow-y:auto;justify-content:flex-start;gap:18px}
+  .mob a{font-size:clamp(1.55rem,8vw,2rem);text-align:center}
+  .mob .btn{font-family:var(--font-b);font-size:.85rem;max-width:280px;margin-top:10px}
+  .mob-close{top:14px;right:18px;width:44px;height:44px}
+
+  .hero{min-height:auto;align-items:flex-start}
+  .hero-bg::after{background:linear-gradient(to bottom,rgba(26,12,4,.92) 0%,rgba(26,12,4,.72) 56%,rgba(26,12,4,.90) 100%)}
+  .hero-content{padding:112px 0 56px;max-width:none;width:100%}
+  .hero-eyebrow{max-width:100%;font-size:.68rem;line-height:1.45;margin-bottom:20px;white-space:normal}
+  .hero h1{font-size:clamp(1.95rem,9.5vw,2.3rem);overflow-wrap:anywhere}
+  .hero h1 br{display:block}
+  .hero-lead{width:100%;max-width:100%;font-size:.98rem;line-height:1.72;margin-bottom:28px;overflow-wrap:anywhere}
+  .hero-btns{gap:10px;margin-bottom:34px}
+  .hero-info{display:grid;grid-template-columns:1fr;gap:14px;padding-top:24px}
+  .hi{align-items:flex-start}
+  .hi-text,.hi-text strong{overflow-wrap:anywhere}
+
+  .ribbon{padding:11px 0}
+  .ribbon-track{gap:28px;animation-duration:22s}
+  .ri{font-size:.66rem}
+
+  .sobre-grid,.res-grid{gap:38px}
+  .sobre-frame{aspect-ratio:1/1.08}
+  .sobre-badge{right:10px;bottom:10px;padding:14px 16px}
+  .sobre-feats{grid-template-columns:1fr}
+  .sf{align-items:flex-start}
+
+  .pratos-grid,.dep-grid{grid-template-columns:1fr}
+  .pratos-head,.menu-head,.dep-head{margin-bottom:38px}
+  .prato:hover,.dep:hover{transform:none}
+
+  .menu-tabs{display:grid;grid-template-columns:1fr 1fr;width:100%;margin-bottom:32px;border-radius:6px}
+  .mtab{min-height:46px;padding:11px 10px;border-right:1px solid var(--sand);border-bottom:1px solid var(--sand);font-size:.72rem}
+  .mtab:nth-child(2n){border-right:none}
+  .mtab:nth-last-child(-n+2){border-bottom:none}
+  .mi{gap:14px;padding:18px 0}
+  .mi-info{min-width:0}
+  .mi-info h4,.mi-info p{overflow-wrap:anywhere}
+  .mi-price{font-size:1.08rem;text-align:right;max-width:42%;overflow-wrap:anywhere}
+
+  .hor-grid{gap:34px}
+  .hor-col h3{font-size:1.25rem;margin-bottom:16px}
+  .hor-row{gap:14px;align-items:flex-start}
+  .hor-day{min-width:92px;flex-shrink:0}
+  .hor-time{text-align:right;overflow-wrap:anywhere;min-width:0}
+  .mapa-placeholder{aspect-ratio:4/3;min-height:190px;text-align:center;padding:18px}
+  .morada p{overflow-wrap:anywhere}
+
+  .res-info p{font-size:.92rem}
+  .rc{align-items:flex-start;padding:12px}
+  .rc-main,.rc-sub{overflow-wrap:anywhere;word-break:break-word}
+  .form-wrap{padding:26px 18px}
+  .form-wrap h3{font-size:1.45rem;margin-bottom:20px}
+  .fg-row{grid-template-columns:1fr;gap:0}
+  .fg input,.fg select,.fg textarea{font-size:16px;min-height:46px}
+  .btn-submit{min-height:50px}
+
+  .foot-grid{grid-template-columns:1fr;gap:30px;text-align:left}
+  .foot-desc{max-width:none}
+  .foot-btm{flex-direction:column;text-align:center;align-items:center}
+  .wa{width:50px;height:50px;right:16px;bottom:16px}
+
+  .rv,.rv-l,.rv-r{
+    opacity:1!important;
+    transform:none!important;
+    transition:none!important;
+  }
+}
+@media(max-width:540px){
+  .hero-content,.hero-btns,.hero-info{max-width:350px}
+}
+@media(max-width:420px){
+  section{padding:56px 0}
+  .container{padding:0 16px}
+  .hero-content{padding-top:100px}
+  .hero h1{font-size:1.95rem}
+  .hero-lead{font-size:.93rem}
+  .label{font-size:.62rem;letter-spacing:.12em}
+  .label::before{width:18px}
+  .menu-tabs{grid-template-columns:1fr}
+  .mtab,.mtab:nth-child(2n),.mtab:nth-last-child(-n+2){border-right:none;border-bottom:1px solid var(--sand)}
+  .mtab:last-child{border-bottom:none}
+  .mi{display:grid;grid-template-columns:1fr;gap:6px}
+  .mi-price{max-width:100%;text-align:left;margin-top:0}
+  .hor-row{display:grid;grid-template-columns:1fr;gap:2px}
+  .hor-day{min-width:0}
+  .hor-time{text-align:left}
+  .form-wrap{margin-left:-2px;margin-right:-2px;padding:24px 16px}
+}
+</style>
+<style id="cardume-modern-estate">
+:root{--cream:#f9f9f9;--warm:#f1f4f4;--sand:rgba(108,124,132,.16);--red:#002a48;--red-dk:#001d32;--red-lt:#00416a;--gold:#fe8b3f;--gold-lt:#ffdbc9;--brown:#1a1c1c;--brown-md:#475156;--gray:#6c7880;--dark:#002a48;--white:#fff;--surface:#fff;--font-d:'Noto Serif',Georgia,serif;--font-b:'Manrope',Arial,sans-serif;--sh:none;--sh-md:0 28px 60px rgba(26,28,28,.05);--sh-lg:0 34px 80px rgba(26,28,28,.06)}
+body{font-family:var(--font-b);background:var(--cream);color:var(--brown);letter-spacing:0}h1,h2,h3,h4{font-family:var(--font-d);font-weight:600;letter-spacing:0}.container{max-width:1180px;padding:0 32px}section{padding:112px 0}.btn{border:0!important;border-radius:2px!important;box-shadow:none!important;font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.btn-primary{background:var(--red)!important;color:#fff!important}.btn-primary:hover{background:var(--red-lt)!important}.btn-outline,.btn-outline-dark{background:rgba(255,255,255,.08)!important;color:#fff!important;box-shadow:inset 0 -2px 0 var(--gold)!important}.btn-outline-dark{background:transparent!important;color:var(--red)!important}.btn-outline-dark:hover{background:var(--gold-lt)!important}.label{color:var(--gold);font-size:.72rem;font-weight:800;letter-spacing:.18em}.label:before{width:10px;height:10px;border-radius:50%;background:var(--gold)}
+#nav{top:16px;padding:0 18px}#nav.scrolled{top:0;background:transparent;box-shadow:none}.nav-inner{max-width:1180px;margin:0 auto;padding:12px 18px;background:rgba(249,249,249,.76);backdrop-filter:blur(18px);box-shadow:0 20px 54px rgba(26,28,28,.06)}.nav-logo{font-family:var(--font-d);font-size:1.36rem;color:var(--red)}.nav-logo span{color:var(--gold)}.nav-links a{color:var(--brown-md);font-size:.76rem;font-weight:800;text-transform:uppercase}.nav-links a:after{height:2px;background:var(--gold)}.nav-social a{color:var(--gray);font-weight:800}.hamburger span{background:var(--red)}.mob{background:linear-gradient(145deg,var(--red),var(--red-lt))}.wa{background:#25d366;box-shadow:0 18px 46px rgba(26,28,28,.14)}
+.nav-right .btn-outline{color:var(--red)!important;background:transparent!important}.hero{min-height:100svh;align-items:flex-start;background:linear-gradient(145deg,var(--red),var(--red-lt));color:#fff}.hero-bg{background:radial-gradient(circle at 14% 24%,rgba(255,219,201,.16),transparent 30%),linear-gradient(145deg,var(--red),var(--red-lt))}.hero-bg:after{background:linear-gradient(90deg,rgba(0,42,72,.94),rgba(0,42,72,.70) 46%,rgba(0,65,106,.18))}.hero-photo{top:0!important;right:0!important;left:auto!important;bottom:auto!important;width:58%;height:100%;padding:104px 0 72px}.hero-photo-placeholder{border-radius:0;background:linear-gradient(135deg,#284b5f,#d9e6e8);background-size:cover;background-position:center}.hero-photo-placeholder:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,42,72,.62),rgba(0,42,72,.02))}.hero-photo-placeholder svg{display:none}.hero-content{padding:170px 0 88px;max-width:720px}.hero-eyebrow{background:transparent;border:0;color:var(--gold-lt);padding:0;border-radius:0;font-size:.74rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase}.hero h1{font-size:clamp(3rem,6.2vw,5.4rem);font-weight:600;line-height:1.04}.hero h1 em{color:var(--gold-lt)}.hero-lead{font-size:1.08rem;color:rgba(255,255,255,.76);line-height:1.9}.hero-info{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;border-top:0;padding-top:0}.hi{background:rgba(255,255,255,.08);backdrop-filter:blur(14px);padding:18px}.hi-text strong{font-weight:800;color:#fff}.ribbon{background:var(--gold-lt);color:var(--red)}.rd{background:var(--gold)}.ri{font-weight:900;letter-spacing:.16em}
+.sobre{background:#fff}.sobre-grid{gap:92px}.sobre-visual{min-height:560px}.sobre-frame{width:82%;box-shadow:none;border-radius:0}.sobre-placeholder{background-size:cover;background-position:center}.sobre-badge{right:0;bottom:26px;background:var(--red);color:#fff;border:0;border-radius:0;box-shadow:none;padding:28px 34px}.sb-n{color:var(--gold-lt);font-weight:600}.sb-l{color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.12em}.sobre-text h2,.pratos-head h2,.menu-head h2,.dep-head h2,.reservas h2{font-size:clamp(2.4rem,4.5vw,4.6rem)!important;color:var(--red)!important}.sobre-text h2 em,.reservas h2 em{color:var(--gold)!important}.sobre-body{color:var(--brown-md);font-size:1rem;line-height:1.95}.sf{background:var(--warm);border-radius:0}.sf-dot{background:var(--gold)}.sf p{font-weight:700;color:var(--brown-md)}
+.pratos{background:var(--warm)}.pratos-head{text-align:left;margin-left:auto;max-width:720px}.pratos-head p{color:var(--gray);font-size:1.05rem}.pratos-grid{grid-template-columns:1.1fr .9fr 1.05fr;gap:28px;align-items:start}.prato{box-shadow:none;border-radius:0;background:#fff}.prato:nth-child(2){margin-top:74px}.prato:nth-child(2) .prato-img{aspect-ratio:3/4}.prato-ph{background-size:cover;background-position:center}.prato-tag{background:var(--red);border-radius:2px;font-weight:900;letter-spacing:.14em}.prato-body{padding:28px}.prato-body h3{color:var(--red);font-size:1.42rem}.prato-body p{color:var(--gray)}.prato-price{color:var(--gold);font-weight:700}
+.menu-section{background:#fff}.menu-tabs{border:0;border-radius:0;background:var(--warm);padding:8px;gap:10px}.mtab{border:0!important;color:var(--red);font-weight:900}.mtab.active,.mtab:hover{background:var(--red);color:#fff}.menu-items{gap:56px;background:var(--warm);padding:48px}.menu-col{border:0!important;padding:0!important;display:flex;flex-direction:column;gap:30px}.mi{border:0!important;padding:0}.mi-info h4{color:var(--red);font-size:1.14rem}.mi-info p{color:var(--gray)}.mi-price{color:var(--gold)}
+.horarios{background:linear-gradient(145deg,var(--red),var(--red-lt));color:#fff}.horarios:before{content:'Cardume';position:absolute;right:-4vw;top:34px;font-family:var(--font-d);font-size:18vw;color:rgba(255,255,255,.035)}.hor-grid{gap:28px}.hor-col{background:rgba(255,255,255,.07);border:0!important;padding:34px}.hor-row{border:0!important}.mapa-placeholder{border:0;border-radius:0;background-size:cover;background-position:center}.depoimentos{background:var(--warm)}.dep-head{text-align:left;max-width:700px}.dep{box-shadow:none;border-radius:0;background:#fff}.dep blockquote{color:var(--red)}.dep-foot{border:0}.dep-av{background:var(--gold-lt);color:var(--red)}
+.reservas{background:#fff;color:var(--brown)}.res-grid{gap:82px}.res-info p,.reservas .rv-l>p{color:var(--brown-md)}.rc,.form-wrap{background:var(--warm);border-radius:0;box-shadow:none}.rc-icon{background:var(--gold-lt)}.rc-main{color:var(--red)}.rc-sub{color:var(--gray)}.form-wrap h3{color:var(--red)}.fg label{color:var(--red);font-weight:900}.fg input,.fg select,.fg textarea{border:0!important;border-radius:0;background:#fff;box-shadow:inset 0 -2px 0 rgba(0,42,72,.12)}.fg input:focus,.fg select:focus,.fg textarea:focus{box-shadow:inset 0 -2px 0 var(--gold)}.btn-submit{background:var(--red);border:0;border-radius:2px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}footer{background:var(--red)}.foot-btm{border:0}.foot-logo{font-family:var(--font-d)}.foot-logo span,.foot-col h5{color:var(--gold-lt)}
+@media(max-width:1040px){.hero-photo{width:100%;opacity:.38}.hero-info,.menu-items{grid-template-columns:1fr}.pratos-grid{grid-template-columns:1fr}.prato:nth-child(2){margin-top:0}}@media(max-width:720px){.container{padding:0 22px}section{padding:78px 0}.hero-content{padding:132px 0 72px;max-width:100%;width:calc(100vw - 44px)}.hero h1{font-size:clamp(2.1rem,10.5vw,2.8rem);overflow-wrap:break-word}.hero-lead{font-size:1rem;max-width:100%;width:100%;overflow-wrap:break-word}.hero-photo{opacity:.20}.hero-info{grid-template-columns:1fr}.sobre-frame{width:92%}.sobre-badge{bottom:0}.menu-items{padding:28px}.mi{flex-direction:column;gap:8px}}
+</style>
+
+
+
+
+
+
+<style id="cardume-hero-logo-fix">
+#nav{
+  top:22px!important;
+  padding:0 26px!important;
+  pointer-events:none;
+}
+#nav.scrolled{
+  top:10px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.nav-inner{
+  max-width:1240px!important;
+  padding:0!important;
+  background:transparent!important;
+  backdrop-filter:none!important;
+  box-shadow:none!important;
+  pointer-events:auto;
+}
+.nav-logo{
+  align-self:flex-start;
+  padding:0!important;
+  color:var(--white)!important;
+}
+.nav-logo img{
+  width:auto!important;
+  max-width:clamp(96px,10vw,148px)!important;
+  max-height:clamp(96px,10vw,148px)!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 14px 24px rgba(0,0,0,.28))!important;
+}
+#nav.scrolled .nav-logo img{
+  max-width:96px!important;
+  max-height:96px!important;
+}
+.nav-links{
+  padding:14px 20px!important;
+  background:rgba(0,42,72,.44)!important;
+  backdrop-filter:blur(18px)!important;
+}
+.nav-links a{
+  color:rgba(255,255,255,.86)!important;
+}
+.nav-links a:hover{
+  color:#fff!important;
+}
+.nav-right{
+  padding:0!important;
+}
+.nav-social{
+  padding:13px 12px!important;
+  background:rgba(0,42,72,.36)!important;
+  backdrop-filter:blur(18px)!important;
+}
+.nav-social a{
+  color:rgba(255,255,255,.74)!important;
+}
+.nav-right .btn-outline{
+  color:#fff!important;
+  background:rgba(0,42,72,.36)!important;
+  backdrop-filter:blur(18px)!important;
+}
+.hero{
+  min-height:100svh!important;
+  align-items:center!important;
+  background:var(--red)!important;
+  isolation:isolate;
+}
+.hero-bg{
+  background:linear-gradient(90deg,rgba(0,42,72,.92),rgba(0,42,72,.62) 48%,rgba(0,42,72,.18))!important;
+  z-index:1!important;
+  pointer-events:none;
+}
+.hero-bg::after{
+  display:none!important;
+}
+.hero-photo{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  padding:0!important;
+  opacity:1!important;
+}
+.hero-photo-placeholder{
+  width:100%!important;
+  height:100%!important;
+  border-radius:0!important;
+  background-position:center center!important;
+  background-size:cover!important;
+}
+.hero-photo-placeholder::after{
+  content:''!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(90deg,rgba(0,42,72,.86) 0%,rgba(0,42,72,.58) 46%,rgba(0,42,72,.16) 100%)!important;
+}
+.hero-content{
+  padding:172px 0 90px!important;
+  max-width:700px!important;
+  position:relative!important;
+  z-index:4!important;
+  opacity:1!important;
+  transform:none!important;
+}
+.hero-content.rv{opacity:1!important;transform:none!important}
+.hero h1{
+  font-size:clamp(3.1rem,5.9vw,5.35rem)!important;
+  line-height:1.03!important;
+}
+.hero-lead{
+  max-width:560px!important;
+}
+.hero-info{
+  max-width:860px!important;
+}
+@media(max-width:1040px){
+  #nav{top:14px!important;padding:0 18px!important}
+  .nav-logo img{max-width:92px!important;max-height:92px!important}
+  .nav-links,.nav-social,.nav-right .btn{display:none!important}
+  .hero-photo-placeholder{background-position:center center!important}
+}
+@media(max-width:720px){
+  #nav{padding:0 14px!important}
+  .nav-logo img{max-width:76px!important;max-height:76px!important}
+  .hero-content{
+    width:calc(100vw - 44px)!important;
+    max-width:346px!important;
+    padding:132px 0 64px!important;
+  }
+  .hero h1{
+    font-size:clamp(2rem,10.2vw,2.72rem)!important;
+    max-width:100%!important;
+  }
+  .hero h1 em{
+    display:block!important;
+  }
+  .hero-lead{
+    max-width:326px!important;
+    font-size:1rem!important;
+    overflow-wrap:normal!important;
+  }
+  .hero-btns,.hero-info{max-width:346px!important}
+  .hero-photo-placeholder{
+    background-position:center top!important;
+  }
+  .hero-photo-placeholder::after{
+    background:linear-gradient(180deg,rgba(0,42,72,.82),rgba(0,42,72,.72) 54%,rgba(0,42,72,.88))!important;
+  }
+}
+</style>
+
+
+
+
+<style id="cardume-refinements">
+/* Refinamentos visuais do Cardume: nao alterar blocos editaveis finais. */
+.hero{
+  min-height:88svh!important;
+  align-items:center!important;
+}
+.hero-photo-placeholder{
+  background-image:url("imagens/hero.jpg")!important;
+  background-size:auto 100%!important;
+  background-repeat:repeat-x!important;
+  background-position:center center!important;
+  filter:saturate(1.04) contrast(.98)!important;
+}
+.hero-bg{
+  background:linear-gradient(90deg,rgba(0,42,72,.32),rgba(0,42,72,.10) 48%,rgba(0,42,72,.04))!important;
+}
+.hero-photo-placeholder::after{
+  background:
+    linear-gradient(90deg,rgba(0,42,72,.48) 0%,rgba(0,42,72,.24) 42%,rgba(0,42,72,.08) 100%),
+    linear-gradient(180deg,rgba(0,42,72,.10),rgba(0,42,72,.18))!important;
+}
+.hero-content{
+  padding:138px 0 74px!important;
+  max-width:690px!important;
+}
+.hero h1{
+  font-size:clamp(2.75rem,5.15vw,4.8rem)!important;
+  line-height:1.04!important;
+  text-shadow:0 18px 40px rgba(0,26,44,.34)!important;
+}
+.hero-lead{
+  max-width:590px!important;
+  color:rgba(255,255,255,.88)!important;
+  text-shadow:0 10px 28px rgba(0,26,44,.30)!important;
+}
+.hero-info{
+  margin-top:8px!important;
+}
+.btn,
+.btn-submit{
+  border-radius:2px!important;
+  background:rgba(255,255,255,.10)!important;
+  color:#fff!important;
+  border:0!important;
+  box-shadow:inset 0 -2px 0 var(--gold), inset 0 0 0 1px rgba(255,255,255,.12)!important;
+  backdrop-filter:blur(14px)!important;
+  letter-spacing:.12em!important;
+  font-weight:800!important;
+}
+.btn-primary,
+.btn-submit{
+  background:rgba(0,42,72,.58)!important;
+}
+.btn-outline,
+.btn-outline-dark{
+  background:rgba(255,255,255,.08)!important;
+}
+.btn:hover,
+.btn-submit:hover{
+  transform:translateY(-2px)!important;
+  background:rgba(254,139,63,.22)!important;
+  box-shadow:inset 0 -2px 0 var(--gold), inset 0 0 0 1px rgba(255,219,201,.30)!important;
+}
+.nav-links,
+.nav-social,
+.nav-right .btn,
+.hero-btns .btn{
+  background:rgba(0,42,72,.26)!important;
+  box-shadow:inset 0 -2px 0 rgba(254,139,63,.70), inset 0 0 0 1px rgba(255,255,255,.10)!important;
+}
+.nav-links{
+  gap:4px!important;
+}
+.nav-links a{
+  padding:16px 18px!important;
+}
+.nav-links a::after{
+  display:none!important;
+}
+.sobre-placeholder{
+  background-image:linear-gradient(rgba(255,255,255,.02),rgba(255,255,255,.02)),url("imagens/galeria2.jpg")!important;
+  background-size:cover!important;
+  background-position:center center!important;
+}
+.sobre-frame{
+  aspect-ratio:4/4.7!important;
+}
+.pratos-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  align-items:stretch!important;
+}
+.prato{
+  height:100%!important;
+  display:flex!important;
+  flex-direction:column!important;
+  margin-top:0!important;
+}
+.prato:nth-child(2){
+  margin-top:0!important;
+}
+.prato-img,
+.prato:nth-child(2) .prato-img,
+.prato:nth-child(3) .prato-img{
+  aspect-ratio:16/11!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+}
+.prato-body{
+  min-height:266px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  padding:30px 32px 28px!important;
+}
+.prato-body h3{
+  min-height:3.1rem!important;
+}
+.prato-body p{
+  flex:1 1 auto!important;
+  overflow:visible!important;
+}
+.prato-price{
+  margin-top:18px!important;
+}
+.horarios{
+  padding:104px 0 96px!important;
+}
+.horarios .container > .rv{
+  margin-bottom:48px!important;
+}
+.hor-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:28px!important;
+  align-items:stretch!important;
+}
+.hor-col{
+  min-height:394px!important;
+  padding:36px 40px!important;
+  background:rgba(255,255,255,.075)!important;
+  border:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+.hor-col h3{
+  min-height:34px!important;
+  margin-bottom:24px!important;
+}
+.hor-row{
+  display:grid!important;
+  grid-template-columns:minmax(90px,1fr) minmax(0,1.35fr)!important;
+  gap:18px!important;
+  align-items:start!important;
+  border:0!important;
+}
+.hor-time{
+  text-align:right!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+.hor-col .btn{
+  margin-top:auto!important;
+}
+.mapa-placeholder{
+  position:relative!important;
+  overflow:hidden!important;
+  aspect-ratio:16/7!important;
+  min-height:156px!important;
+  padding:0!important;
+  background:#edf2f5!important;
+  border:0!important;
+  box-shadow:inset 0 0 0 1px rgba(0,42,72,.08)!important;
+}
+.mapa-placeholder.tem-foto{
+  background-image:none!important;
+}
+.mapa-placeholder > svg,
+.mapa-placeholder > p{
+  display:none!important;
+}
+.mapa-art{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(0,42,72,.06) 1px,transparent 1px) 0 0/92px 92px,
+    linear-gradient(0deg,rgba(0,42,72,.06) 1px,transparent 1px) 0 0/92px 92px,
+    #eef3f6;
+}
+.map-road{
+  position:absolute;
+  height:14px;
+  border-radius:999px;
+  background:#c9d6df;
+  box-shadow:0 0 0 3px rgba(255,255,255,.74);
+  transform-origin:center;
+}
+.map-road.r1{width:118%;left:-8%;top:48%;transform:rotate(-8deg)}
+.map-road.r2{width:86%;left:18%;top:23%;transform:rotate(33deg)}
+.map-road.r3{width:72%;left:-12%;top:72%;transform:rotate(22deg)}
+.map-road.r4{width:54%;right:-8%;top:61%;transform:rotate(-48deg)}
+.map-water{
+  position:absolute;
+  left:-5%;
+  bottom:-28%;
+  width:58%;
+  height:52%;
+  border-radius:50%;
+  background:rgba(169,205,226,.42);
+}
+.map-pin{
+  position:absolute;
+  left:54%;
+  top:45%;
+  width:16px;
+  height:16px;
+  border-radius:50% 50% 50% 0;
+  background:var(--gold);
+  transform:rotate(-45deg);
+  box-shadow:0 4px 12px rgba(0,42,72,.18);
+}
+.map-pin::after{
+  content:'';
+  position:absolute;
+  inset:5px;
+  border-radius:50%;
+  background:#fff;
+}
+.map-label{
+  position:absolute;
+  color:#52626c;
+  font:700 .68rem/1.1 var(--font-b);
+  white-space:nowrap;
+}
+.map-label.l1{left:9%;top:14%}
+.map-label.l2{left:48%;top:21%}
+.map-label.l3{left:57%;top:58%}
+.map-label.l4{left:16%;top:70%}
+@media(max-width:1040px){
+  .hero{min-height:82svh!important}
+  .hero-photo-placeholder{
+    background-size:cover!important;
+    background-repeat:no-repeat!important;
+  }
+  .hero-photo-placeholder::after{
+    background:linear-gradient(180deg,rgba(0,42,72,.54),rgba(0,42,72,.44) 46%,rgba(0,42,72,.66))!important;
+  }
+  .hor-grid{
+    grid-template-columns:1fr!important;
+  }
+  .hor-col{
+    min-height:auto!important;
+  }
+}
+@media(max-width:720px){
+  .hero{
+    min-height:auto!important;
+  }
+  .hero-content{
+    padding:118px 0 60px!important;
+    max-width:346px!important;
+  }
+  .hero h1{
+    font-size:clamp(2rem,10vw,2.72rem)!important;
+  }
+  .hero-photo-placeholder{
+    background-position:center top!important;
+  }
+  .hero-btns .btn,
+  .btn{
+    min-height:50px!important;
+  }
+  .sobre-frame{
+    aspect-ratio:1/1.05!important;
+  }
+  .prato-body{
+    min-height:auto!important;
+    padding:26px 24px!important;
+  }
+  .prato-body h3{
+    min-height:0!important;
+  }
+  .mapa-placeholder{
+    aspect-ratio:16/9!important;
+  }
+  .hor-row{
+    grid-template-columns:1fr!important;
+  }
+  .hor-time{
+    text-align:left!important;
+  }
+}
+</style>
+
+
+<style id="cardume-mobile-image-fallbacks">
+/* Fallbacks estaticos para mobile/preview quando o JS nao aplica as imagens a tempo. */
+.nav-logo img,
+.foot-logo img{
+  display:block!important;
+}
+.hero-photo-placeholder{
+  background-image:linear-gradient(90deg,rgba(0,42,72,.62),rgba(0,42,72,.24)),url("imagens/hero.jpg")!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-repeat:no-repeat!important;
+}
+.sobre-placeholder{
+  background-image:linear-gradient(rgba(255,255,255,.02),rgba(255,255,255,.02)),url("imagens/galeria2.jpg")!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-repeat:no-repeat!important;
+}
+.ph1{
+  background-image:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),url("imagens/sardinhas.jpg")!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-repeat:no-repeat!important;
+}
+.ph2{
+  background-image:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),url("imagens/polvo.jpg")!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-repeat:no-repeat!important;
+}
+.ph3{
+  background-image:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),url("imagens/bacalhau.jpg")!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-repeat:no-repeat!important;
+}
+@media(max-width:720px){
+  .pratos-grid{
+    grid-template-columns:1fr!important;
+  }
+  .prato,
+  .prato:nth-child(2),
+  .prato:nth-child(3){
+    width:100%!important;
+    margin-top:0!important;
+  }
+  .prato-img,
+  .prato:nth-child(2) .prato-img,
+  .prato:nth-child(3) .prato-img{
+    aspect-ratio:16/11!important;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/WHATSAPP DO RESTAURANTE?text=Olá!%20Gostaria%20de%20fazer%20uma%20reserva." target="_blank" rel="noopener" class="wa" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo"><img src="imagens/logo-float-crop.png" alt="Cardume"></a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#pratos">Pratos</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#horarios">Horários</a></li>
+      <li><a href="#reservas">Contacto</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-social">
+        <a href="#" aria-label="Facebook">fb</a>
+        <a href="#" aria-label="Instagram">ig</a>
+      </div>
+      <a href="tel:TELEFONE DO RESTAURANTE" class="btn btn-primary" style="padding:10px 22px;font-size:.78rem">Ligar agora</a>
+      <a href="#reservas" class="btn btn-outline" style="padding:10px 22px;font-size:.78rem">Reservar</a>
+    </div>
+    <button class="hamburger" id="ham" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mob" id="mob" role="dialog" aria-label="Menu">
+  <button class="mob-close" id="mobClose" aria-label="Fechar">✕</button>
+  <a href="#sobre">Sobre</a>
+  <a href="#pratos">Pratos</a>
+  <a href="#menu">Menu</a>
+  <a href="#horarios">Horários</a>
+  <a href="#reservas">Reservas</a>
+  <a href="#reservas" class="btn btn-primary" style="margin-top:8px">Reservar Mesa</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-photo">
+    <div class="hero-photo-placeholder">
+      <svg viewBox="0 0 100 100" fill="none">
+        <circle cx="50" cy="35" r="18" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+        <path d="M20 70 Q35 55 50 65 Q65 75 80 60" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="none"/>
+        <rect x="30" y="75" width="40" height="2" rx="1" fill="rgba(255,255,255,0.08)"/>
+      </svg>
+    </div>
+  </div>
+  <div class="container">
+    <div class="hero-content rv">
+      <div class="hero-eyebrow">Cozinha portuguesa em Vila Nova de Gaia</div>
+      <h1>Peixe fresco,<br/>vinho português<br/><em>tempo à mesa.</em></h1>
+      <p class="hero-lead">O Cardume cruza a memória das casas de costa com uma sala luminosa, azulejos antigos e pratos servidos sem pressa: peixe na brasa, polvo no forno, bacalhau dourado e vinhos que pedem conversa.</p>
+      <div class="hero-btns">
+        <a href="#reservas" class="btn btn-primary">Reservar mesa</a>
+        <a href="#menu" class="btn btn-outline">Ver menu</a>
+      </div>
+      <div class="hero-info">
+        <div class="hi"><span class="hi-icon">📍</span><div class="hi-text"><strong>Rua da Ribeira Nova, 18</strong>Vila Nova de Gaia</div></div>
+        <div class="hi"><span class="hi-icon">🕐</span><div class="hi-text"><strong>12h30-15h30 · 19h00-23h00</strong>Terça a Domingo</div></div>
+        <div class="hi"><span class="hi-icon">📞</span><div class="hi-text"><strong>+351 932 280 272</strong>Reservas por chamada ou WhatsApp</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RIBBON -->
+<div class="ribbon" aria-hidden="true">
+  <div class="ribbon-track">
+    <div class="ri">Peixe do dia</div><div class="rd"></div>
+    <div class="ri">Polvo no forno</div><div class="rd"></div>
+    <div class="ri">Reservas Online</div><div class="rd"></div>
+    <div class="ri">Cozinha de costa</div><div class="rd"></div>
+    <div class="ri">Azulejo e brasa</div><div class="rd"></div>
+    <div class="ri">Vila Nova de Gaia</div><div class="rd"></div>
+    <div class="ri">Cozinha Tradicional</div><div class="rd"></div>
+    <div class="ri">Ingredientes Frescos</div><div class="rd"></div>
+    <div class="ri">Reservas Online</div><div class="rd"></div>
+    <div class="ri">Desde 2010</div><div class="rd"></div>
+    <div class="ri">Petiscos e Pratos Principais</div><div class="rd"></div>
+    <div class="ri">Vila Nova de Gaia</div><div class="rd"></div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="rv-l">
+        <div class="sobre-visual">
+          <div class="sobre-frame">
+            <div class="sobre-placeholder">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="opacity:.15"><circle cx="40" cy="40" r="30" stroke="white" stroke-width="1.5"/><path d="M25 40h30M40 25v30" stroke="white" stroke-width="1.5"/></svg>
+            </div>
+          </div>
+          <div class="sobre-badge">
+            <div class="sb-n">12</div>
+            <div class="sb-l">anos de<br>mesa portuguesa</div>
+          </div>
+        </div>
+      </div>
+      <div class="rv-r">
+        <span class="label">A Nossa Casa</span>
+        <h2>Uma mesa portuguesa<br/>com alma de <em>costa.</em></h2>
+        <div class="sobre-body" style="margin-top:18px">
+          <p>Entre a cerâmica branca, o azul dos azulejos e o perfume da brasa, o Cardume nasceu para receber como uma casa de família junto ao rio: com tempo, cuidado e produto tratado com respeito.</p>
+          <p>A cozinha parte da lota, dos legumes de produtores próximos e de receitas portuguesas reconhecíveis, afinadas com leveza para uma sala contemporânea, íntima e cheia de luz.</p>
+        </div>
+        <div class="sobre-feats" style="margin-top:24px">
+          <div class="sf"><div class="sf-dot"></div><p>Peixe fresco da lota</p></div>
+          <div class="sf"><div class="sf-dot"></div><p>Vinhos portugueses seleccionados</p></div>
+          <div class="sf"><div class="sf-dot"></div><p>Sala luminosa e intimista</p></div>
+          <div class="sf"><div class="sf-dot"></div><p>Vinho da casa seleccionado</p></div>
+        </div>
+        <div style="margin-top:28px">
+          <a href="#reservas" class="btn btn-outline-dark">Reservar uma mesa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRATOS EM DESTAQUE -->
+<section class="pratos" id="pratos">
+  <div class="container">
+    <div class="pratos-head rv">
+      <span class="label">Os Nossos Pratos</span>
+      <h2>Os favoritos da casa</h2>
+      <p>Três pratos pensados para traduzir a identidade do Cardume: brasa, forno, azeite bom e ingredientes portugueses servidos com elegância simples.</p>
+    </div>
+    <div class="pratos-grid">
+      <div class="prato rv" style="transition-delay:.05s">
+        <div class="prato-img"><div class="prato-ph ph1"><span class="prato-tag">Especialidade</span></div></div>
+        <div class="prato-body">
+          <h3>Sardinhas na Brasa</h3>
+          <p>Sardinhas grelhadas no ponto, limão, azeite de ervas e batata nova com sal marinho.</p>
+          <div class="prato-price">€ 14,50</div>
+        </div>
+      </div>
+      <div class="prato rv" style="transition-delay:.1s">
+        <div class="prato-img"><div class="prato-ph ph2"><span class="prato-tag">Mais pedido</span></div></div>
+        <div class="prato-body">
+          <h3>Polvo à Lagareiro</h3>
+          <p>Polvo tenro assado no forno, batata dourada, alho, salsa fresca e azeite virgem extra.</p>
+          <div class="prato-price">€ 16,00</div>
+        </div>
+      </div>
+      <div class="prato rv" style="transition-delay:.15s">
+        <div class="prato-img"><div class="prato-ph ph3"><span class="prato-tag">Novidade</span></div></div>
+        <div class="prato-body">
+          <h3>Bacalhau Gratinado</h3>
+          <p>Bacalhau lascado em forno quente, creme leve, batata macia e ervas frescas.</p>
+          <div class="prato-price">€ 13,50</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:44px" class="rv">
+      <a href="#menu" class="btn btn-outline-dark">Ver menu completo</a>
+    </div>
+  </div>
+</section>
+
+<!-- MENU COMPLETO -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="menu-head rv">
+      <span class="label">Menu</span>
+      <h2>O nosso menu</h2>
+    </div>
+    <div class="menu-tabs rv" id="menuTabs">
+      <button class="mtab active" data-cat="entradas">Entradas</button>
+      <button class="mtab" data-cat="principais">Principais</button>
+      <button class="mtab" data-cat="sobremesas">Sobremesas</button>
+      <button class="mtab" data-cat="bebidas">Bebidas</button>
+    </div>
+    <div class="menu-cat active" id="entradas">
+      <div class="menu-items">
+        <div class="menu-col">
+          <div class="mi"><div class="mi-info"><h4>Entrada 1</h4><p>Descrição breve da entrada, ingredientes principais.</p></div><div class="mi-price">€ 6,50</div></div>
+          <div class="mi"><div class="mi-info"><h4>Entrada 2</h4><p>Descrição breve da entrada, ingredientes principais.</p></div><div class="mi-price">€ 7,00</div></div>
+          <div class="mi"><div class="mi-info"><h4>Entrada 3</h4><p>Descrição breve da entrada, ingredientes principais.</p></div><div class="mi-price">€ 5,50</div></div>
+        </div>
+        <div class="menu-col">
+          <div class="mi"><div class="mi-info"><h4>Entrada 4</h4><p>Descrição breve da entrada, ingredientes principais.</p></div><div class="mi-price">€ 8,00</div></div>
+          <div class="mi"><div class="mi-info"><h4>Entrada 5</h4><p>Descrição breve da entrada, ingredientes principais.</p></div><div class="mi-price">€ 6,00</div></div>
+          <div class="mi"><div class="mi-info"><h4>Entrada 6</h4><p>Descrição breve da entrada, ingredientes principais.</p></div><div class="mi-price">€ 7,50</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-cat" id="principais">
+      <div class="menu-items">
+        <div class="menu-col">
+          <div class="mi"><div class="mi-info"><h4>Sardinhas na Brasa</h4><p>Descrição completa do prato e como é servido.</p></div><div class="mi-price">€ 14,50</div></div>
+          <div class="mi"><div class="mi-info"><h4>Polvo à Lagareiro</h4><p>Descrição completa do prato e como é servido.</p></div><div class="mi-price">€ 16,00</div></div>
+          <div class="mi"><div class="mi-info"><h4>Bacalhau Gratinado</h4><p>Descrição completa do prato e como é servido.</p></div><div class="mi-price">€ 13,50</div></div>
+        </div>
+        <div class="menu-col">
+          <div class="mi"><div class="mi-info"><h4>Robalo na Brasa</h4><p>Descrição completa do prato e como é servido.</p></div><div class="mi-price">€ 18,00</div></div>
+          <div class="mi"><div class="mi-info"><h4>Carapau de Escabeche</h4><p>Descrição completa do prato e como é servido.</p></div><div class="mi-price">€ 15,50</div></div>
+          <div class="mi"><div class="mi-info"><h4>Entrecôte da Quinta</h4><p>Descrição completa do prato e como é servido.</p></div><div class="mi-price">€ 12,00</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-cat" id="sobremesas">
+      <div class="menu-items">
+        <div class="menu-col">
+          <div class="mi"><div class="mi-info"><h4>Sobremesa 1</h4><p>Descrição da sobremesa, ingredientes e apresentação.</p></div><div class="mi-price">€ 4,50</div></div>
+          <div class="mi"><div class="mi-info"><h4>Sobremesa 2</h4><p>Descrição da sobremesa, ingredientes e apresentação.</p></div><div class="mi-price">€ 5,00</div></div>
+        </div>
+        <div class="menu-col">
+          <div class="mi"><div class="mi-info"><h4>Sobremesa 3</h4><p>Descrição da sobremesa, ingredientes e apresentação.</p></div><div class="mi-price">€ 4,00</div></div>
+          <div class="mi"><div class="mi-info"><h4>Sobremesa 4</h4><p>Descrição da sobremesa, ingredientes e apresentação.</p></div><div class="mi-price">€ 5,50</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-cat" id="bebidas">
+      <div class="menu-items">
+        <div class="menu-col">
+          <div class="mi"><div class="mi-info"><h4>Vinho Tinto da Casa</h4><p>Vinho regional seleccionado pelo chef.</p></div><div class="mi-price">€ 3,50 / copo</div></div>
+          <div class="mi"><div class="mi-info"><h4>Vinho Branco da Casa</h4><p>Vinho regional seleccionado pelo chef.</p></div><div class="mi-price">€ 3,50 / copo</div></div>
+          <div class="mi"><div class="mi-info"><h4>Água</h4><p>Garrafa 0,5L ou 1L.</p></div><div class="mi-price">€ 1,00</div></div>
+        </div>
+        <div class="menu-col">
+          <div class="mi"><div class="mi-info"><h4>Refrigerantes</h4><p>Selecção de refrigerantes nacionais e internacionais.</p></div><div class="mi-price">€ 2,00</div></div>
+          <div class="mi"><div class="mi-info"><h4>Café / Expresso</h4><p>Café torrado da melhor qualidade.</p></div><div class="mi-price">€ 0,80</div></div>
+          <div class="mi"><div class="mi-info"><h4>Sumos Naturais</h4><p>Espremidos na hora, frescos do dia.</p></div><div class="mi-price">€ 2,50</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HORÁRIOS -->
+<section class="horarios" id="horarios">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px" class="rv">
+      <span class="label" style="color:var(--gold-lt);justify-content:center">Informações</span>
+      <h2 style="font-family:var(--font-d);font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--white);margin-top:8px">Onde estamos e <em style="color:var(--gold)">quando abrimos</em></h2>
+    </div>
+    <div class="hor-grid">
+      <div class="hor-col rv-l">
+        <h3>Horário de Funcionamento</h3>
+        <div class="hor-row"><span class="hor-day">Segunda</span><span class="hor-time closed">Fechado</span></div>
+        <div class="hor-row"><span class="hor-day">Terça a Sexta</span><span class="hor-time">12h–15h · 19h–23h</span></div>
+        <div class="hor-row"><span class="hor-day">Sábado</span><span class="hor-time">12h–16h · 19h–23h30</span></div>
+        <div class="hor-row"><span class="hor-day">Domingo</span><span class="hor-time">12h–16h</span></div>
+      </div>
+      <div class="hor-col rv">
+        <h3>Localização</h3>
+        <div class="mapa-placeholder">
+          <div class="mapa-art" aria-hidden="true">
+            <div class="map-water"></div>
+            <div class="map-road r1"></div>
+            <div class="map-road r2"></div>
+            <div class="map-road r3"></div>
+            <div class="map-road r4"></div>
+            <div class="map-pin"></div>
+            <span class="map-label l1">General Torres</span>
+            <span class="map-label l2">Av. da República</span>
+            <span class="map-label l3">Câmara de Gaia</span>
+            <span class="map-label l4">R. do Conselheiro</span>
+          </div>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="13" r="5" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><path d="M16 4C10.477 4 6 8.477 6 14c0 7.5 10 18 10 18s10-10.5 10-18c0-5.523-4.477-10-10-10z" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" fill="none"/></svg>
+          <p>Mapa — integrar Google Maps aqui</p>
+        </div>
+        <div class="morada">
+          <p><strong>Rua da Ribeira Nova, 18</strong><br/>Vila Nova de Gaia</p>
+        </div>
+      </div>
+      <div class="hor-col rv-r">
+        <h3>Contactos</h3>
+        <div class="hor-row"><span class="hor-day">Telefone</span><span class="hor-time">TELEFONE DO RESTAURANTE</span></div>
+        <div class="hor-row"><span class="hor-day">WhatsApp</span><span class="hor-time">WHATSAPP DO RESTAURANTE</span></div>
+        <div class="hor-row"><span class="hor-day">Email</span><span class="hor-time" style="font-size:.76rem">contacto@riversidestudio.eu</span></div>
+        <div style="margin-top:24px">
+          <a href="tel:TELEFONE DO RESTAURANTE" class="btn btn-primary" style="width:100%;justify-content:center">Ligar para reservar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="depoimentos" id="depoimentos">
+  <div class="container">
+    <div class="dep-head rv">
+      <span class="label">Testemunhos</span>
+      <h2>O que dizem os nossos clientes</h2>
+    </div>
+    <div class="dep-grid">
+      <div class="dep rv" style="transition-delay:.05s">
+        <div class="dep-stars">★★★★★</div>
+        <blockquote>"Excelente comida e serviço impecável. O ambiente é muito acolhedor e os pratos são autênticos. Já voltámos várias vezes e nunca nos desiludiu."</blockquote>
+        <div class="dep-foot"><div class="dep-av av1">MA</div><div><div class="dep-name">Maria A.</div><div class="dep-loc">Google · Há 2 semanas</div></div></div>
+      </div>
+      <div class="dep rv" style="transition-delay:.1s">
+        <div class="dep-stars">★★★★★</div>
+        <blockquote>"O melhor restaurante de Vila Nova de Gaia. Os ingredientes são sempre frescos e as doses são generosas. Recomendo vivamente a toda a família."</blockquote>
+        <div class="dep-foot"><div class="dep-av av2">JP</div><div><div class="dep-name">João P.</div><div class="dep-loc">TripAdvisor · Há 1 mês</div></div></div>
+      </div>
+      <div class="dep rv" style="transition-delay:.15s">
+        <div class="dep-stars">★★★★★</div>
+        <blockquote>"Uma experiência gastronómica única. A equipa é extremamente simpática e atenciosa. Os pratos chegam sempre bem apresentados e deliciosos."</blockquote>
+        <div class="dep-foot"><div class="dep-av av3">SR</div><div><div class="dep-name">Sofia R.</div><div class="dep-loc">Google · Há 3 semanas</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVAS -->
+<section class="reservas" id="reservas">
+  <div class="container">
+    <div class="res-grid">
+      <div class="rv-l">
+        <span class="label">Reservas</span>
+        <h2 style="font-family:var(--font-d);font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--white);margin-bottom:16px">Reserve a sua <em style="color:var(--gold)">mesa hoje.</em></h2>
+        <p>Garanta o seu lugar e venha desfrutar de uma experiência gastronómica inesquecível. Respondemos a todas as reservas em menos de 2 horas.</p>
+        <div class="res-contact">
+          <div class="rc"><div class="rc-icon rci1">💬</div><div><div class="rc-main">WHATSAPP DO RESTAURANTE</div><div class="rc-sub">Resposta imediata</div></div></div>
+          <div class="rc"><div class="rc-icon rci2">📞</div><div><div class="rc-main">TELEFONE DO RESTAURANTE</div><div class="rc-sub">Seg–Dom · 10h–23h</div></div></div>
+          <div class="rc"><div class="rc-icon rci3">📧</div><div><div class="rc-main">contacto@riversidestudio.eu</div><div class="rc-sub">Resposta em até 2h</div></div></div>
+        </div>
+      </div>
+      <div class="rv-r">
+        <div class="form-wrap">
+          <h3>Fazer reserva</h3>
+          <form id="resForm" novalidate>
+            <div class="fg-row">
+              <div class="fg"><label>Nome *</label><input type="text" name="nome" placeholder="O seu nome" required/></div>
+              <div class="fg"><label>Telefone *</label><input type="tel" name="tel" placeholder="+351 900 000 000" required/></div>
+            </div>
+            <div class="fg-row">
+              <div class="fg"><label>Data *</label><input type="date" name="data" required/></div>
+              <div class="fg"><label>Hora *</label>
+                <select name="hora" required>
+                  <option value="">Selecione...</option>
+                  <option>12:00</option><option>12:30</option><option>13:00</option>
+                  <option>13:30</option><option>14:00</option><option>14:30</option>
+                  <option>19:00</option><option>19:30</option><option>20:00</option>
+                  <option>20:30</option><option>21:00</option><option>21:30</option>
+                  <option>22:00</option>
+                </select>
+              </div>
+            </div>
+            <div class="fg"><label>Número de pessoas *</label>
+              <select name="pessoas" required>
+                <option value="">Selecione...</option>
+                <option>1 pessoa</option><option>2 pessoas</option><option>3 pessoas</option>
+                <option>4 pessoas</option><option>5 pessoas</option><option>6 pessoas</option>
+                <option>7-10 pessoas</option><option>Grupo +10</option>
+              </select>
+            </div>
+            <div class="fg"><label>Pedidos especiais</label><textarea name="notas" rows="3" placeholder="Alergias, aniversários, cadeira de bebé..."></textarea></div>
+            <button type="submit" class="btn-submit">Confirmar reserva</button>
+          </form>
+          <div class="form-ok" id="formOk">
+            <div style="font-size:2.5rem;margin-bottom:10px">🍽️</div>
+            <h4>Reserva recebida!</h4>
+            <p>Entraremos em contacto em breve para confirmar a sua mesa.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo"><img src="imagens/logo-float-crop.png" alt="Cardume"></div>
+        <p class="foot-desc">Cozinha tradicional com ingredientes frescos e receitas de família. O melhor da gastronomia portuguesa em Vila Nova de Gaia.</p>
+        <div class="foot-soc">
+          <a href="#" class="fs" aria-label="Facebook">f</a>
+          <a href="#" class="fs" aria-label="Instagram">ig</a>
+          <a href="#" class="fs" aria-label="TripAdvisor">ta</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Navegação</h5>
+        <ul>
+          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="#pratos">Os nossos pratos</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#horarios">Horários</a></li>
+          <li><a href="#reservas">Reservas</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Horários</h5>
+        <ul>
+          <li><a href="#">Ter–Sex: 12h–23h</a></li>
+          <li><a href="#">Sáb: 12h–23h30</a></li>
+          <li><a href="#">Dom: 12h–16h</a></li>
+          <li><a href="#">Seg: Fechado</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contactos</h5>
+        <ul>
+          <li><a href="tel:TELEFONE DO RESTAURANTE">TELEFONE DO RESTAURANTE</a></li>
+          <li><a href="mailto:contacto@riversidestudio.eu">contacto@riversidestudio.eu</a></li>
+          <li><a href="#">Rua da Ribeira Nova, 18</a></li>
+          <li><a href="#">Vila Nova de Gaia</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-btm">
+      <p>© 2026 Cardume · Todos os direitos reservados</p>
+      <p>Desenvolvido por <span style="color:var(--gold)">Riverside Studio</span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /*
+  ==========================================================
+  PREENCHA AQUI OS DADOS DO CLIENTE
+  Troque apenas o texto entre aspas. Nao mexa no resto do codigo.
+  ==========================================================
+  */
+
+  const CLIENTE = {
+    nome: 'Cardume', cidade: 'Vila Nova de Gaia', morada: 'Rua da Ribeira Nova, 18', telefone: '+351 932 280 272', whatsapp: '351932280272', email: 'contacto@riversidestudio.eu', instagram: 'cardume.gaia', facebook: '#', tripadvisor: '#', descricaoCurta: 'Cozinha portuguesa de costa, peixe fresco, bacalhau de forno e vinhos escolhidos para mesas demoradas junto ao Douro.', textoWhatsApp: 'Olá! Gostaria de fazer uma reserva no Cardume.'
+  };
+  const VISUAL = { corPrincipal: '#002a48', corPrincipalEscura: '#001d32', corPrincipalClara: '#00416a', corDestaque: '#fe8b3f', corDestaqueClara: '#ffdbc9', fundoClaro: '#f9f9f9', fundoSuave: '#f1f4f4', fundoEscuro: '#002a48', cartoesFundo: '#ffffff', bordaSuave: 'rgba(108,124,132,.16)', textoEscuro: '#1a1c1c', textoMedio: '#475156', textoSuave: '#6c7880', fonteTitulos: "'Noto Serif', Georgia, serif", fonteTexto: "'Manrope', Arial, sans-serif", googleFontsUrl: 'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap' };
+  const IMAGENS = { logo: 'imagens/logo-float-crop.png', hero: 'imagens/hero.jpg', sobre: 'imagens/menu.jpg', prato1: 'imagens/sardinhas.jpg', prato2: 'imagens/polvo.jpg', prato3: 'imagens/bacalhau.jpg', mapa: 'imagens/galeria1.jpg' };
+  const HERO = { etiqueta: 'Cozinha portuguesa em Vila Nova de Gaia', titulo: 'Peixe fresco,<br/>vinho português<br/><em>tempo à mesa.</em>', descricao: 'O Cardume cruza a memória das casas de costa com uma sala luminosa, azulejos antigos e pratos servidos sem pressa: peixe na brasa, polvo no forno, bacalhau dourado e vinhos que pedem conversa.', botaoReservar: 'Reservar mesa', botaoMenu: 'Ver menu', infoMoradaTitulo: 'Rua da Ribeira Nova, 18', infoMoradaTexto: 'Vila Nova de Gaia', infoHorarioTitulo: '12h30-15h30 · 19h00-23h00', infoHorarioTexto: 'Terça a Domingo', infoTelefoneTitulo: '+351 932 280 272', infoTelefoneTexto: 'Reservas por chamada ou WhatsApp' };
+  const FITA = ['Peixe do dia','Polvo no forno','Vinhos portugueses','Reservas à mesa','Vila Nova de Gaia','Cozinha de costa','Azulejo e brasa','Produtos locais'];
+  const SOBRE = { etiqueta: 'A Nossa Casa', titulo: 'Uma mesa portuguesa<br/>com alma de <em>costa.</em>', paragrafos: ['Entre a cerâmica branca, o azul dos azulejos e o perfume da brasa, o Cardume nasceu para receber como uma casa de família junto ao rio: com tempo, cuidado e produto tratado com respeito.','A cozinha parte da lota, dos legumes de produtores próximos e de receitas portuguesas reconhecíveis, afinadas com leveza para uma sala contemporânea, íntima e cheia de luz.'], anosNumero: '12', anosTexto: 'anos de<br>mesa portuguesa', diferenciais: ['Peixe fresco da lota','Legumes de produtores locais','Vinhos portugueses seleccionados','Sala luminosa e intimista','Receitas de costa revisitadas','Reservas para grupos'], botao: 'Reservar uma mesa' };
+  const PRATOS_SECAO = { etiqueta: 'Da Costa Para A Mesa', titulo: 'Pratos da casa', descricao: 'Três pratos pensados para traduzir a identidade do Cardume: brasa, forno, azeite bom e ingredientes portugueses servidos com elegância simples.', botao: 'Ver menu completo' };
+  const PRATOS_DESTAQUE = [{tag:'Especialidade',nome:'Sardinhas na Brasa',descricao:'Sardinhas grelhadas no ponto, limão, azeite de ervas e batata nova com sal marinho. Um clássico de costa tratado com precisão.',preco:'€ 18,50'},{tag:'Mais pedido',nome:'Polvo à Lagareiro',descricao:'Polvo tenro assado no forno, batata dourada, alho, salsa fresca e azeite virgem extra. Conforto português, sem peso.',preco:'€ 23,00'},{tag:'Sazonal',nome:'Bacalhau Gratinado',descricao:'Bacalhau lascado em forno quente, creme leve, batata macia e ervas frescas. Dourado por cima, delicado por dentro.',preco:'€ 22,00'}];
+  const MENU = { etiqueta: 'Menu', titulo: 'Carta do Cardume', entradas: [['Ostras ao Natural','Ostras frescas com limão, vinagrete leve e pimenta da ilha.','€ 3,80 / un.'],['Amêijoas à Bulhão Pato','Amêijoas abertas em alho, coentros, azeite virgem extra e molho para molhar o pão.','€ 14,50'],['Croquetes de Bacalhau','Bacalhau lascado, batata, salsa e maionese de limão.','€ 8,00'],['Pica-pau de Atum','Atum braseado, pickles caseiros e molho de alho suave.','€ 12,00'],['Salada de Tomate Antigo','Tomate de época, flor de sal, cebola roxa e manjericão.','€ 7,50'],['Queijo de Cabra no Forno','Mel de rosmaninho, nozes e pão de fermentação lenta.','€ 9,00']], principais: [['Sardinhas na Brasa','Sardinhas grelhadas, limão, azeite de ervas e batata nova.','€ 18,50'],['Polvo à Lagareiro','Polvo assado, batata dourada, alho, salsa e azeite virgem extra.','€ 23,00'],['Bacalhau Gratinado','Bacalhau lascado, creme leve, batata macia e ervas frescas.','€ 22,00'],['Robalo na Brasa','Robalo fresco grelhado, legumes assados e azeite aromático.','€ 24,00'],['Carapau de Escabeche','Carapau fresco, escabeche cítrico e salada morna de feijão-frade.','€ 17,50'],['Entrecôte da Quinta','Carne maturada, batata frita fina e molho de vinho tinto.','€ 25,00']], sobremesas: [['Leite-creme Queimado','Clássico português com açúcar estaladiço e limão.','€ 6,00'],['Pudim Abade Priscos','Receita rica, textura sedosa e caramelo escuro.','€ 6,50'],['Tarte de Amêndoa','Amêndoa tostada, flor de sal e nata fresca.','€ 6,00'],['Pêra em Vinho do Porto','Pêra cozida lentamente, especiarias e creme leve.','€ 6,50'],['Mousse de Chocolate e Azeite','Chocolate negro, azeite virgem e sal marinho.','€ 6,00'],['Queijos Portugueses','Selecção de queijos, compota e pão rústico.','€ 9,50']], bebidas: [['Vinho Verde da Casa','Fresco, mineral e perfeito para peixe grelhado.','€ 4,00 / copo'],['Branco do Douro','Branco estruturado com final cítrico.','€ 5,00 / copo'],['Tinto do Dão','Elegante, leve e gastronómico.','€ 5,00 / copo'],['Porto Tónico','Porto branco, água tónica, limão e hortelã.','€ 8,00'],['Limonada de Erva-príncipe','Limonada fresca com infusão aromática.','€ 4,00'],['Água com ou sem gás','Garrafa 0,75L.','€ 2,50']] };
+  const INFORMACOES = { etiqueta:'Informações', titulo:'Onde estamos e <em style="color:var(--gold-lt)">quando abrimos</em>', horarioTitulo:'Horário de Funcionamento', horarios:[['Segunda','Fechado',true],['Terça a Sexta','12h30-15h30 · 19h00-23h00',false],['Sábado','12h30-16h00 · 19h00-23h30',false],['Domingo','12h30-16h00',false]], localizacaoTitulo:'Localização', mapaTexto:'Rua da Ribeira Nova, 18 · Vila Nova de Gaia', contactosTitulo:'Contactos', botaoLigar:'Ligar para reservar' };
+  const DEPOIMENTOS = { etiqueta:'Testemunhos', titulo:'O que fica depois da refeição', items:[['Maria A.','Google · há 2 semanas','Uma sala lindíssima, peixe no ponto e serviço atento sem ser formal demais. Voltámos logo no mês seguinte.'],['João P.','TripAdvisor · há 1 mês','O polvo à lagareiro chegou tenro, com batata perfeita e aquele azeite que pede pão até ao fim.'],['Sofia R.','Google · há 3 semanas','O Cardume tem um equilíbrio raro entre tradição portuguesa e detalhe moderno. Excelente carta de vinhos.']] };
+  const RESERVAS = { etiqueta:'Reservas', titulo:'Reserve a sua <em style="color:var(--gold)">mesa.</em>', texto:'Escolha o dia, a hora e o número de pessoas. Confirmamos a reserva por telefone, WhatsApp ou email, sempre com atenção ao detalhe.', whatsappSub:'Resposta imediata', telefoneSub:'Ter-Dom · 10h-23h', emailSub:'contacto@riversidestudio.eu', formularioTitulo:'Fazer reserva', botaoFormulario:'Confirmar reserva', sucessoTitulo:'Reserva recebida!', sucessoTexto:'Entraremos em contacto em breve para confirmar a sua mesa.' };
+  const RODAPE = { descricao:'Cozinha portuguesa de costa, peixe fresco, polvo no forno e bacalhau dourado. Uma casa luminosa em Vila Nova de Gaia, pensada para refeições demoradas e bem acompanhadas.', credito:'Desenvolvido por Riverside Studio' };
+
+  const limparTelefone = valor => String(valor || '').replace(/[^\d+]/g,'');
+  const whatsappNumero = String(CLIENTE.whatsapp || '').replace(/\D/g,'');
+  const dados = {
+    'Cardume': CLIENTE.nome,
+    'Vila Nova de Gaia': CLIENTE.cidade,
+    'Rua da Ribeira Nova, 18': CLIENTE.morada,
+    'TELEFONE DO RESTAURANTE': CLIENTE.telefone,
+    'WHATSAPP DO RESTAURANTE': CLIENTE.whatsapp,
+    'contacto@riversidestudio.eu': CLIENTE.email
+  };
+
+  const trocarTextos = root => {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node=>{
+      let texto = node.nodeValue;
+      Object.entries(dados).forEach(([de,para])=>{ texto = texto.split(de).join(para); });
+      node.nodeValue = texto;
+    });
+  };
+
+  const trocarAtributos = () => {
+    document.title = CLIENTE.nome;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if(metaDesc) metaDesc.setAttribute('content', `${CLIENTE.nome} - Restaurante em ${CLIENTE.cidade}. Reservas: ${CLIENTE.telefone}`);
+
+    document.querySelectorAll('a[href^="tel:"]').forEach(a=>a.href=`tel:${limparTelefone(CLIENTE.telefone)}`);
+    document.querySelectorAll('a[href^="mailto:"]').forEach(a=>a.href=`mailto:${CLIENTE.email}`);
+    document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{
+      a.href=`https://wa.me/${whatsappNumero}?text=${encodeURIComponent(CLIENTE.textoWhatsApp)}`;
+    });
+
+    const sociais = [
+      ['Facebook', CLIENTE.facebook],
+      ['Instagram', CLIENTE.instagram],
+      ['TripAdvisor', CLIENTE.tripadvisor]
+    ];
+    sociais.forEach(([label,url])=>{
+      document.querySelectorAll(`a[aria-label="${label}"]`).forEach(a=>a.href=url || '#');
+    });
+  };
+
+  const preencher = valor => {
+    let texto = String(valor ?? '');
+    Object.entries(dados).forEach(([de,para])=>{ texto = texto.split(de).join(para); });
+    return texto;
+  };
+
+  const setTexto = (seletor, texto) => {
+    const el = document.querySelector(seletor);
+    if(el && texto !== undefined) el.textContent = preencher(texto);
+  };
+
+  const setHtml = (seletor, html) => {
+    const el = document.querySelector(seletor);
+    if(el && html !== undefined) el.innerHTML = preencher(html);
+  };
+
+  const caminhosImagem = url => {
+    if(!url) return [];
+    const limpo = String(url).trim();
+    if(/^(https?:)?\/\//i.test(limpo) || limpo.startsWith('data:')) return [limpo];
+    const arquivo = limpo.split('/').pop();
+    return [...new Set([limpo, `./${limpo}`, arquivo, `./${arquivo}`])];
+  };
+
+  const carregarImagem = (url, pronto) => {
+    const caminhos = caminhosImagem(url);
+    let i = 0;
+    const tentar = () => {
+      const atual = caminhos[i++];
+      if(!atual) return;
+      const img = new Image();
+      img.onload = () => pronto(atual);
+      img.onerror = tentar;
+      img.src = atual;
+    };
+    tentar();
+  };
+
+  const aplicarImagem = (seletor, url, overlay='') => {
+    const el = document.querySelector(seletor);
+    if(!el || !url) return;
+    carregarImagem(url, caminho => {
+      el.classList.add('tem-foto');
+      el.style.backgroundImage = `${overlay ? overlay + ',' : ''}url("${caminho}")`;
+    });
+  };
+
+  const aplicarVisual = () => {
+    const r = document.documentElement;
+    r.style.setProperty('--red', VISUAL.corPrincipal);
+    r.style.setProperty('--red-dk', VISUAL.corPrincipalEscura);
+    r.style.setProperty('--red-lt', VISUAL.corPrincipalClara);
+    r.style.setProperty('--gold', VISUAL.corDestaque);
+    r.style.setProperty('--gold-lt', VISUAL.corDestaqueClara);
+    r.style.setProperty('--cream', VISUAL.fundoClaro);
+    r.style.setProperty('--warm', VISUAL.fundoSuave);
+    r.style.setProperty('--dark', VISUAL.fundoEscuro);
+    r.style.setProperty('--surface', VISUAL.cartoesFundo || '#FFFFFF');
+    r.style.setProperty('--sand', VISUAL.bordaSuave || '#E0D3C4');
+    r.style.setProperty('--brown', VISUAL.textoEscuro);
+    r.style.setProperty('--brown-md', VISUAL.textoMedio);
+    r.style.setProperty('--gray', VISUAL.textoSuave);
+    r.style.setProperty('--font-d', VISUAL.fonteTitulos);
+    r.style.setProperty('--font-b', VISUAL.fonteTexto);
+
+    const fontLink = document.querySelector('link[href*="fonts.googleapis.com"]');
+    if(fontLink && VISUAL.googleFontsUrl) fontLink.href = VISUAL.googleFontsUrl;
+  };
+
+  const aplicarMarca = () => {
+    if(IMAGENS.logo){
+      carregarImagem(IMAGENS.logo, caminho => {
+        const alt = preencher(CLIENTE.nome);
+        document.querySelectorAll('.nav-logo,.foot-logo').forEach(el=>{
+          el.innerHTML = `<img src="${caminho}" alt="${alt}">`;
+        });
+      });
+      return;
+    }
+    const partes = preencher(CLIENTE.nome).trim().split(/\s+/);
+    const destaque = partes.length > 1 ? partes.pop() : '';
+    const base = partes.join(' ') || preencher(CLIENTE.nome);
+    const logoHtml = destaque ? `${base} <span>${destaque}</span>` : base;
+    document.querySelectorAll('.nav-logo,.foot-logo').forEach(el=>{ el.innerHTML = logoHtml; });
+  };
+
+  const aplicarHero = () => {
+    setTexto('.hero-eyebrow', HERO.etiqueta);
+    setHtml('.hero h1', HERO.titulo);
+    setTexto('.hero-lead', HERO.descricao);
+    setTexto('.hero-btns .btn-primary', HERO.botaoReservar);
+    setTexto('.hero-btns .btn-outline', HERO.botaoMenu);
+    const infos = document.querySelectorAll('.hero-info .hi');
+    const heroInfos = [
+      [HERO.infoMoradaTitulo, HERO.infoMoradaTexto],
+      [HERO.infoHorarioTitulo, HERO.infoHorarioTexto],
+      [HERO.infoTelefoneTitulo, HERO.infoTelefoneTexto]
+    ];
+    infos.forEach((item,i)=>{
+      const strong = item.querySelector('strong');
+      const text = item.querySelector('.hi-text');
+      if(strong) strong.textContent = preencher(heroInfos[i][0]);
+      if(text){
+        strong && text.removeChild(strong);
+        text.textContent = preencher(heroInfos[i][1]);
+        strong && text.prepend(strong);
+      }
+    });
+  };
+
+  const aplicarFita = () => {
+    const track = document.querySelector('.ribbon-track');
+    if(!track || !Array.isArray(FITA)) return;
+    const itens = [...FITA, ...FITA];
+    track.innerHTML = itens.map(item=>`<div class="ri">${preencher(item)}</div><div class="rd"></div>`).join('');
+  };
+
+  const aplicarSobre = () => {
+    setTexto('.sobre-text .label', SOBRE.etiqueta);
+    setHtml('.sobre-text h2', SOBRE.titulo);
+    const body = document.querySelector('.sobre-body');
+    if(body && Array.isArray(SOBRE.paragrafos)){
+      body.innerHTML = SOBRE.paragrafos.map(p=>`<p>${preencher(p)}</p>`).join('');
+    }
+    setHtml('.sb-n', SOBRE.anosNumero);
+    setHtml('.sb-l', SOBRE.anosTexto);
+    document.querySelectorAll('.sobre-feats .sf p').forEach((el,i)=>{
+      if(SOBRE.diferenciais[i]) el.textContent = preencher(SOBRE.diferenciais[i]);
+    });
+    setTexto('.sobre-text .btn', SOBRE.botao);
+  };
+
+  const aplicarPratosDestaque = () => {
+    setTexto('.pratos-head .label', PRATOS_SECAO.etiqueta);
+    setTexto('.pratos-head h2', PRATOS_SECAO.titulo);
+    setTexto('.pratos-head p', PRATOS_SECAO.descricao);
+    setTexto('.pratos .btn', PRATOS_SECAO.botao);
+
+    document.querySelectorAll('.pratos-grid .prato').forEach((card,i)=>{
+      const prato = PRATOS_DESTAQUE[i];
+      if(!prato) return;
+      setTextoCard(card,'.prato-tag',prato.tag);
+      setTextoCard(card,'.prato-body h3',prato.nome);
+      setTextoCard(card,'.prato-body p',prato.descricao);
+      setTextoCard(card,'.prato-price',prato.preco);
+    });
+  };
+
+  const setTextoCard = (root,seletor,texto) => {
+    const el = root.querySelector(seletor);
+    if(el && texto !== undefined) el.textContent = preencher(texto);
+  };
+
+  const aplicarMenu = () => {
+    setTexto('.menu-head .label', MENU.etiqueta);
+    setTexto('.menu-head h2', MENU.titulo);
+    ['entradas','principais','sobremesas','bebidas'].forEach(categoria=>{
+      const linhas = document.querySelectorAll(`#${categoria} .mi`);
+      const itens = MENU[categoria] || [];
+      linhas.forEach((linha,i)=>{
+        const item = itens[i];
+        if(!item) return;
+        setTextoCard(linha,'h4',item[0]);
+        setTextoCard(linha,'p',item[1]);
+        setTextoCard(linha,'.mi-price',item[2]);
+      });
+    });
+  };
+
+  const aplicarInformacoes = () => {
+    setTexto('#horarios .label', INFORMACOES.etiqueta);
+    setHtml('#horarios h2', INFORMACOES.titulo);
+    const cols = document.querySelectorAll('#horarios .hor-col');
+    if(cols[0]) setTextoCard(cols[0],'h3',INFORMACOES.horarioTitulo);
+    if(cols[1]) setTextoCard(cols[1],'h3',INFORMACOES.localizacaoTitulo);
+    if(cols[2]) setTextoCard(cols[2],'h3',INFORMACOES.contactosTitulo);
+    setTexto('.mapa-placeholder p', INFORMACOES.mapaTexto);
+    setTexto('#horarios .btn', INFORMACOES.botaoLigar);
+
+    document.querySelectorAll('#horarios .hor-col:first-child .hor-row').forEach((linha,i)=>{
+      const item = INFORMACOES.horarios[i];
+      if(!item) return;
+      setTextoCard(linha,'.hor-day',item[0]);
+      setTextoCard(linha,'.hor-time',item[1]);
+      const hora = linha.querySelector('.hor-time');
+      if(hora) hora.classList.toggle('closed', Boolean(item[2]));
+    });
+  };
+
+  const aplicarDepoimentos = () => {
+    setTexto('.dep-head .label', DEPOIMENTOS.etiqueta);
+    setTexto('.dep-head h2', DEPOIMENTOS.titulo);
+    document.querySelectorAll('.dep-grid .dep').forEach((card,i)=>{
+      const item = DEPOIMENTOS.items[i];
+      if(!item) return;
+      setTextoCard(card,'blockquote',`"${preencher(item[2])}"`);
+      setTextoCard(card,'.dep-name',item[0]);
+      setTextoCard(card,'.dep-loc',item[1]);
+      const av = card.querySelector('.dep-av');
+      if(av) av.textContent = preencher(item[0]).split(/\s+/).map(p=>p[0]).join('').slice(0,2).toUpperCase();
+    });
+  };
+
+  const aplicarReservas = () => {
+    setTexto('.reservas .label', RESERVAS.etiqueta);
+    setHtml('.reservas h2', RESERVAS.titulo);
+    setTexto('.reservas .rv-l > p', RESERVAS.texto);
+    const subs = document.querySelectorAll('.rc-sub');
+    if(subs[0]) subs[0].textContent = preencher(RESERVAS.whatsappSub);
+    if(subs[1]) subs[1].textContent = preencher(RESERVAS.telefoneSub);
+    if(subs[2]) subs[2].textContent = preencher(RESERVAS.emailSub);
+    setTexto('.form-wrap h3', RESERVAS.formularioTitulo);
+    setTexto('.btn-submit', RESERVAS.botaoFormulario);
+    setTexto('.form-ok h4', RESERVAS.sucessoTitulo);
+    setTexto('.form-ok p', RESERVAS.sucessoTexto);
+  };
+
+  const aplicarRodape = () => {
+    setTexto('.foot-desc', RODAPE.descricao);
+    const credito = document.querySelector('.foot-btm p:last-child');
+    if(credito) credito.innerHTML = preencher(RODAPE.credito).replace('Riverside Studio','<span style="color:var(--gold)">Riverside Studio</span>');
+  };
+
+  const aplicarImagens = () => {
+    aplicarImagem('.hero-photo-placeholder', IMAGENS.hero, 'linear-gradient(90deg,rgba(0,42,72,.82) 0%,rgba(0,42,72,.58) 46%,rgba(0,42,72,.20) 100%)');
+    aplicarImagem('.sobre-placeholder', IMAGENS.sobre, 'linear-gradient(rgba(42,21,8,.10),rgba(42,21,8,.10))');
+    aplicarImagem('.ph1', IMAGENS.prato1, 'linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18))');
+    aplicarImagem('.ph2', IMAGENS.prato2, 'linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18))');
+    aplicarImagem('.ph3', IMAGENS.prato3, 'linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18))');
+    aplicarImagem('.mapa-placeholder', IMAGENS.mapa, 'linear-gradient(rgba(26,12,4,.42),rgba(26,12,4,.42))');
+  };
+
+  trocarTextos(document.body);
+  trocarAtributos();
+  aplicarVisual();
+  aplicarMarca();
+  aplicarHero();
+  aplicarFita();
+  aplicarSobre();
+  aplicarPratosDestaque();
+  aplicarMenu();
+  aplicarInformacoes();
+  aplicarDepoimentos();
+  aplicarReservas();
+  aplicarRodape();
+  aplicarImagens();
+
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50),{passive:true});
+
+  const ham=document.getElementById('ham');
+  const mob=document.getElementById('mob');
+  const mc=document.getElementById('mobClose');
+  const openM=()=>{mob.classList.add('open');document.body.style.overflow='hidden';ham.setAttribute('aria-expanded','true')};
+  const shutM=()=>{mob.classList.remove('open');document.body.style.overflow='';ham.setAttribute('aria-expanded','false')};
+  ham.addEventListener('click',openM);
+  mc.addEventListener('click',shutM);
+  mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',shutM));
+  document.addEventListener('keydown',e=>e.key==='Escape'&&shutM());
+
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const href=a.getAttribute('href');
+      if(!href||href==='#')return;
+      const t=document.querySelector(href);
+      if(!t)return;
+      e.preventDefault();
+      window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-76,behavior:'smooth'});
+    });
+  });
+
+  document.querySelectorAll('.mtab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      document.querySelectorAll('.mtab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.menu-cat').forEach(c=>c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.cat).classList.add('active');
+    });
+  });
+
+  const revealEls=document.querySelectorAll('.rv,.rv-l,.rv-r');
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}});
+    },{threshold:.1,rootMargin:'0px 0px -32px 0px'});
+    revealEls.forEach(el=>io.observe(el));
+  }else{
+    revealEls.forEach(el=>el.classList.add('on'));
+  }
+
+  const form=document.getElementById('resForm');
+  const ok=document.getElementById('formOk');
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    let valid=true;
+    form.querySelectorAll('[required]').forEach(f=>{
+      const ok2=f.value.trim()!=='';
+      f.style.borderColor=ok2?'':'#7A1E1E';
+      if(!ok2)valid=false;
+    });
+    if(!valid)return;
+    const fd = new FormData(form);
+    const msg = [
+      `Olá, ${CLIENTE.nome}! Gostaria de fazer uma reserva.`,
+      '',
+      `Nome: ${fd.get('nome')}`,
+      `Telefone: ${fd.get('tel')}`,
+      `Data: ${fd.get('data')}`,
+      `Hora: ${fd.get('hora')}`,
+      `Pessoas: ${fd.get('pessoas')}`,
+      fd.get('notas') ? `Pedidos especiais: ${fd.get('notas')}` : ''
+    ].filter(Boolean).join('\n');
+    if(whatsappNumero){
+      window.open(`https://wa.me/${whatsappNumero}?text=${encodeURIComponent(msg)}`,'_blank','noopener');
+    }
+    form.style.display='none';
+    ok.style.display='block';
+  });
+  form.querySelectorAll('input,select,textarea').forEach(f=>{
+    f.addEventListener('input',()=>f.style.borderColor='');
+  });
+
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    revealEls.forEach(el=>{el.style.transition='none';el.classList.add('on')});
+  }
+})();
+</script>
+</body>
+</html>
